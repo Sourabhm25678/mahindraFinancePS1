@@ -24,6 +24,17 @@ public class LeadService {
 	@Autowired
 	private LeadRepository leadRepository;
 	
+	/**
+	 * Create Lead in database.
+	 * 
+	 * @implNote This is the implementation of the service layer for
+	 *           {@link com.lead.demo.controller.LeadController#createLead(LeadRequestBean, org.springframework.validation.BindingResult) 
+	 *           createLead}. It's function is to create a new lead in database
+	 *           if no lead exists with same leadIs. Otherwise, return an error response.
+	 * @param leadRequest {@code LeadRequestBean} LeadRequestBean
+	 * @return {@code Object} Response body will have http status
+	 *         code along with the response body.
+	 */
 	public ResponseEntity<Object> createLeadinDB(LeadRequestBean leadRequest) {
 		
 		Lead l1 = leadRepository.findByLeadId(leadRequest.getLeadId());
@@ -38,6 +49,18 @@ public class LeadService {
 		return new ResponseEntity<>(responseBean, HttpStatus.CREATED);
 	}
 	
+	/**
+	 * Fetch Lead from database.
+	 * 
+	 * @implNote This is the implementation of the service layer for
+	 *           {@link com.lead.demo.controller.LeadController#fetchLead(String) 
+	 *           fetchLead}. It's function is to fetch lead from database
+	 *           on the basis of mobileNumber. If no record is present in database,
+	 *           return error response.
+	 * @param mobileNumber {@code String} mobileNumber
+	 * @return {@code Object} Response body will have http status
+	 *         code along with the response body.
+	 */
 	public ResponseEntity<Object> fetchLeads(String mobileNumber) {
 		
 		List<Lead> leads = leadRepository.findByMobileNumber(mobileNumber);
@@ -117,7 +140,5 @@ public class LeadService {
 		responseError.setErrorResponse(errorResponse);
 		return responseError;
 	}
-	
-	
 
 }

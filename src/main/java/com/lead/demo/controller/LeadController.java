@@ -36,6 +36,18 @@ public class LeadController {
 	@Autowired
 	private LeadService leadService;
 	
+	/**
+	 * Create Lead in database.
+	 * 
+	 * @apiNote This API is responsible for creating new lead in database
+	 *    		if no lead exists with the same leadId.
+	 *    
+	 * @param leadRequestBean {@code LeadRequestBean} Request body 
+	 * 			for lead creation.
+	 * 
+	 * @return Object {@code Object} - 
+	 * 			Response body will have HttpStatus and it's corresponding code.
+	 */
 	@PostMapping("/v1/lead/create")
 	@Operation(operationId = "createLead", summary = "Lead creation endpoint", description = "API to create a lead")
 	@ApiResponses(value = {
@@ -48,6 +60,18 @@ public class LeadController {
 		return leadService.createLeadinDB(leadRequestBean);
 	}
 	
+	/**
+	 * Fetch Lead from database.
+	 * 
+	 * @apiNote This API is responsible for fetching lead in database
+	 *    		on the basis of mobileNumber.
+	 *    
+	 * @param mobileNumber {@code String} Request body 
+	 * 			for fetching lead details.
+	 * 
+	 * @return Object {@code Object} -
+	 *         Response body will have HttpStatus and it's corresponding code.
+	 */
 	@GetMapping(value = "/v1/lead/{mobileNumber}")
 	@Operation(operationId = "fetchLead", summary = "Fetch lead details.", description = "API to fetch lead details against mobile n umber")
 	@ApiResponses(value = {
